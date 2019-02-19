@@ -11,18 +11,20 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    command: build
-    projects: '**/*.csproj'
-    arguments: '--configuration Release'
+    displayName: 'Build'
+    inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration Release'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Package artifacts'
-  inputs:
-    command: publish
-    projects: '**/*.csproj'
-    arguments: '--output $(Build.ArtifactStagingDirectory)'
+- task: ArchiveFiles@2
+    displayName: "Archive files"
+    inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        includeRootFolder: false
+        archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish artifacts'
+    displayName: 'Publish artifacts'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+    name: 'build'
