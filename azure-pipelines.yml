@@ -10,11 +10,19 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- script: dotnet build --configuration Release
+- task: DotNetCoreCLI@2
   displayName: 'Build'
+  inputs:
+    command: build
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
 
-- script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+- task: DotNetCoreCLI@2
   displayName: 'Package artifacts'
+  inputs:
+    command: publish
+    projects: '**/*.csproj'
+    arguments: '--output $(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts'
