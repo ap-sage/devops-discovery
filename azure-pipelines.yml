@@ -24,7 +24,7 @@ steps:
     includeRootFolder: false
     archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@0
   displayName: 'Publish artifacts'
   targetPath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
   artifactName: 'build'
