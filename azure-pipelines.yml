@@ -26,5 +26,6 @@ steps:
 
 - task: PublishPipelineArtifact@0
   displayName: 'Publish artifacts'
-  targetPath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
-  artifactName: 'build'
+  inputs:
+    targetPath: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+    artifactName: 'build'
