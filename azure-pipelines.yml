@@ -18,9 +18,9 @@ steps:
     arguments: '--configuration Release'
 
 - task: ArchiveFiles@2
-  displayName: "Archive files"
+  displayName: 'Package artifacts'
   inputs:
-    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)/src/Serverless/bin/Release/netstandard2.0'
     includeRootFolder: false
     archiveFile: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
 
