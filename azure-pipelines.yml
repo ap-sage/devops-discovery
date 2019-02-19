@@ -10,10 +10,14 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: dotnet restore
+  displayName: 'Install dependencies'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- script: dotnet build --configuration Release
+  displayName: 'Build'
+
+- script: dotnet publish --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Package artifacts'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
